@@ -31,7 +31,11 @@ tables:
     drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
 ```
 
-### Configuration
+The `run` command prints estimated cost and complexity scores. the following files will be generated.
+
+
+
+## Configuration
 Tables can be sourced in different ways.
 - local csv
     - `table: /path/to/csv`
