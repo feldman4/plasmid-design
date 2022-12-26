@@ -388,16 +388,6 @@ def add_features(record, features):
     return new_record
 
 
-def estimate_cost():
-    cost = 0
-    for _, seq in read_fasta(gene_order_fasta):
-        if len(seq) > 3000:
-            cost += 0.19 * len(seq)
-        else:
-            cost += 0.08 * len(seq)
-    return int(cost)
-
-
 def setup_block():
     setup()
     download_tables()
@@ -419,7 +409,6 @@ def reverse_translate_block(**rt_args):
 
 def design_block():
     generate_vectors()
-    print(f'Estimated cost (USD): {estimate_cost()}')
 
 
 def check_complexity_block():
