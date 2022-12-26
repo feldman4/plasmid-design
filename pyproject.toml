@@ -1,0 +1,41 @@
+[project]
+name = "plasmid_design"
+version = "0.0.1"
+description = "Automated plasmid design from speadsheet specification"
+authors = [
+  { name="David Feldman" },
+]
+license = {file = "LICENSE.txt"}
+readme = "README.md"
+requires-python = ">=3.7"
+
+keywords = ["plasmid", "vector", "design", "DNA"]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+	"dnachisel",
+  "fire",
+  "joblib",
+  "natsort",
+  "python-slugify",
+	"pandas",	
+  "pygsheets",
+  "pyyaml",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+"Homepage" = "https://github.com/feldman4/plasmid-design"
+"Bug Tracker" = "https://github.com/feldman4/plasmid-design/issues"
+
+[project.scripts]
+plasmid_design = "plasmid_design.plasmid_design:main"
+

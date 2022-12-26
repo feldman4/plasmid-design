@@ -1,0 +1,39 @@
+# table value can point to different sources
+# - local csv
+#    table: /path/to/csv
+# - private google sheets
+#    table: "drive:{spreadsheet name}/{sheet name}"
+# - public google sheets
+#    table: "drive_key:{sheet_name}"
+#    drive_key: {drive_key}
+
+# to obtain drive_key, enable public Viewer access in google sheets,
+# then copy from URL: https://docs.google.com/spreadsheets/d/{drive_key}/
+
+
+tables:
+  # vector definitions
+  templates: 
+    table: drive_key:templates
+    # selects just these rows
+    gate: experiment == "example"
+    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+
+  # DNA and protein part definitions
+  parts: 
+    table: drive_key:parts
+    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+  
+  # these DNA features will automatically be annotated
+  features: 
+    table: drive_key:features
+    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+  
+  # these restriction sites will be avoided
+  restriction_enzymes: 
+    table: drive_key:enzymes
+    # selects just these rows
+    gate: pT02_BsaI == "x"
+    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+
+
