@@ -424,7 +424,9 @@ def run():
     setup_block()
     if pd.read_csv(template_table).shape[0] == 0:
         raise SystemExit('Aborting! No templates.')
-    reverse_translate_block(seed=1)
+    rt_args = {'seed': 1}
+    rt_args.update(load_config().get('rt_args', {}))
+    reverse_translate_block(**rt_args)
     design_block()
     check_complexity_block()
     
