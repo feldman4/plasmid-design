@@ -2,6 +2,7 @@ from tqdm.auto import tqdm
 import joblib
 import pandas as pd
 import yaml
+from string import Formatter
 
 
 def assert_unique(df, *cols):
@@ -80,3 +81,15 @@ def filter_yaml_table(df, gate=None, drop_duplicates=None, rename=None, verbose=
     if rename is not None:
         df = df.rename(columns=rename)
     return df
+
+
+def format_string_any_field(fmt, fields):
+    """Fill in a python format string with invalid field names 
+    (i.e., containing any character).
+    """
+    s = ''
+    for prefix, stuffing, _, _ in Formatter().parse(fmt):
+        prefix = '' if prefix is None else prefix
+        stuffing = '' if stuffing is None else fields[stuffing]
+        s += (prefix + stuffing)
+    return s

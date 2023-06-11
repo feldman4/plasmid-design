@@ -3,7 +3,7 @@
 TODO: check that kozak (GCCACC) is always followed by ATG
 """
 from .drive import Drive
-from .utils import load_yaml_table, assert_unique, ProgressParallel
+from .utils import load_yaml_table, assert_unique, format_string_any_field
 from .sequence import read_fasta, write_fasta, translate_dna, reverse_translate_random
 from .sequence import reverse_complement as rc
 from .idt_api import score_dna_idt_parallel
@@ -27,7 +27,6 @@ Bio.PDB.Polypeptide.aa1 = str(Bio.PDB.Polypeptide.aa1)
 Bio.PDB.Polypeptide.aa3 = list(Bio.PDB.Polypeptide.aa3)
 
 import dnachisel as dc
-
 
 config_file = 'config.yaml'
 parts_table = 'parts.csv'
@@ -285,7 +284,7 @@ def create_genbank(name, template, parts, topology='circular'):
     """Each field in the `template` string must have an entry in the `parts` dictionary.
     """    
     parts = dict(parts)
-    dna = template.format(**parts)
+    dna = format_string_any_field(template, parts)
     keys = template.replace('{', '').split('}')[:-1]
     features = {x: parts[x] for x in keys}
 
@@ -440,7 +439,6 @@ def main():
         '2_design',
         '3_check',
         'split_order',
-        'estimate_cost',
         'validate_template_table',
         ]
 
