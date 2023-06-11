@@ -5,30 +5,31 @@
 In a new directory, save the following to `config.yaml`, then run `plasmid_design run`. The configuration below refers to [this spreadsheet](https://docs.google.com/spreadsheets/d/1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM/edit#gid=52604569).
 
 ```yaml
+drive_key: &drive_key 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
 tables:
   # vector definitions
   templates: 
     table: drive_key:templates
     # selects just these rows
     gate: experiment == "example"
-    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+    drive_key: *drive_key
 
   # DNA and protein part definitions
   parts: 
     table: drive_key:parts
-    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+    drive_key: *drive_key
   
   # these DNA features will automatically be annotated
   features: 
     table: drive_key:features
-    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+    drive_key: *drive_key
   
   # these restriction sites will be avoided
   restriction_enzymes: 
     table: drive_key:enzymes
     # selects just these rows
     gate: pT02_BsaI == "x"
-    drive_key: 1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM
+    drive_key: *drive_key
 ```
 
 The `run` command prints estimated cost and complexity scores. the following files will be generated.
