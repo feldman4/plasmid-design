@@ -288,8 +288,6 @@ def create_genbank(name, template, parts, topology='circular'):
     keys = template.replace('{', '').split('}')[:-1]
     features = {x: parts[x] for x in keys}
 
-    dna = ''.join(features.values())
-    
     i = 0
     arr = []
     for key in keys:
