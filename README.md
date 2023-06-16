@@ -1,5 +1,7 @@
 ## Installation
-`pip install plasmid_design`
+```bash
+pip install plasmid_design
+```
 
 ## Example
 In a new directory, save the following to `config.yaml`, then run `plasmid_design run`. The `drive_key` below refers to [this spreadsheet](https://docs.google.com/spreadsheets/d/1QWFQUlIJYERJ6zY-THD9uNagD2a_He7RUfcOeF2eEKM/edit#gid=52604569).
