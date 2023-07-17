@@ -37,7 +37,12 @@ def find_service_file(search='*service*.json'):
 
 def read_csv_from_url(key, sheet_name, skiprows=0, **kwargs):
     url = CSV_EXPORT_URL.format(key=key, sheet_name=sheet_name)
-    df = pd.read_csv(url, skiprows=skiprows)
+    try:
+        df = pd.read_csv(url, skiprows=skiprows)
+    except pd.errors.ParserError as e:
+        extra_info = ('\n\nDid you remember to make this sheet public? ' 
+              '\nClick Share > General access > Anyone with the link')
+        raise pd.errors.ParserError(str(e) + extra_info)
     return Drive.clean(df, **kwargs)
 
 
