@@ -34,7 +34,7 @@ binder_table = 'binders.csv'
 target_table = 'targets.csv'
 feature_table = 'features.csv'
 template_table = 'templates.csv'
-sites_to_avoid = 'reverse_translations/sites_to_avoid.csv'
+restriction_enzyme_table = 'reverse_translations/restriction_enzymes.csv'
 rt_input_fasta = 'reverse_translations/input.fa'
 rt_output_fasta = 'reverse_translations/output.fa'
 rt_idt_scores = 'reverse_translations/idt_scores.csv'
@@ -74,7 +74,7 @@ def download_tables():
     (load_yaml_table(c['restriction_enzymes'])
      .assign(site=lambda x: x['name'].apply(
         lambda y: getattr(Restriction, y).site))
-     .to_csv(sites_to_avoid, index=None)
+     .to_csv(restriction_enzyme_table, index=None)
     )
 
 
@@ -115,7 +115,7 @@ def prepare_reverse_translations():
         (df_features['white_list'].dropna().rename('enzyme').pipe(pd.DataFrame)
         .assign(site=lambda x: x['enzyme'].apply(
             lambda y: getattr(Bio.Restriction, y).site))
-        .to_csv(sites_to_avoid, index=None)
+        .to_csv(restriction_enzyme_table, index=None)
         )
 
 
@@ -124,7 +124,7 @@ def do_reverse_translations(skip_existing=False, **rt_args):
     genbanks with DNA Chisel annotations. Only coding sequences!!
     """
     df_seqs = pd.DataFrame(read_fasta(rt_input_fasta), columns=('name', 'aa_seq'))
-    df_sites = pd.read_csv(sites_to_avoid)
+    df_sites = pd.read_csv(restriction_enzyme_table)
     
     translations = {}
     if skip_existing:
