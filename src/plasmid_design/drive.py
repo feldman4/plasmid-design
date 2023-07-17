@@ -13,8 +13,8 @@ import pandas as pd
 import pygsheets
 
 
-CSV_EXPORT_URL = ('https://docs.google.com/spreadsheets/d/{key}/gviz/'
-                  'tq?tqx=out:csv&sheet={sheet_name}')
+BASE_URL = 'https://docs.google.com/spreadsheets/d/{key}'
+CSV_EXPORT_URL = f'{BASE_URL}/gviz/tq?tqx=out:csv&sheet={{sheet_name}}'
 
 
 def find_service_file(search='*service*.json'):
@@ -40,8 +40,11 @@ def read_csv_from_url(key, sheet_name, skiprows=0, **kwargs):
     try:
         df = pd.read_csv(url, skiprows=skiprows)
     except pd.errors.ParserError as e:
-        extra_info = ('\n\nDid you remember to make this sheet public? ' 
-              '\nClick Share > General access > Anyone with the link')
+        base_url = BASE_URL.format(key=key)
+        extra_info = (
+            '\n\nDid you remember to make this sheet public? '
+            f'\n{base_url}'
+            '\nClick Share > General access > Anyone with the link')
         raise pd.errors.ParserError(str(e) + extra_info)
     return Drive.clean(df, **kwargs)
 
