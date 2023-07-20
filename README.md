@@ -32,6 +32,12 @@ tables:
     # selects just these rows
     gate: pT02_BsaI == "x"
     drive_key: *drive_key
+
+# optional key, override default arguments to DNAChisel
+rt_args:
+  species: h_sapiens # or e_coli, s_cerevisiae, etc
+  seed: 1 # random seed
+  k: 6 # avoid repeated DNA sequences of this length
 ```
 
 The `run` command prints estimated cost and complexity scores. The following files will be generated:
