@@ -1,3 +1,7 @@
+## Motivation
+
+A simple tool to design multi-component plasmids, based on a spreadsheet defining DNA/protein components and the layout of each plasmid. It's intended for direct gene synthesis (not cloning). 
+
 ## Installation
 ```bash
 pip install plasmid_design
